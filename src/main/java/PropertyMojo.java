@@ -14,9 +14,15 @@ public class PropertyMojo extends AbstractMojo {
     @Parameter(defaultValue = "${project}", required = true, readonly = true)
     MavenProject project;
 
+    @Parameter(property = "scope")
+    String scope;
+
     public void execute() throws MojoExecutionException, MojoFailureException {
-        List<Dependency> dependencies = project.getDependencies();
-        long numDependencies = dependencies.stream().count();
+        List<Dependency> dependencies;
+        dependencies = project.getDependencies();
+        long numDependencies = dependencies.stream()
+                .filter(d -> (scope == null || scope.isEmpty()) || scope.equals(d.getScope()))
+                .count();
         getLog().info("Number of dependencies: " + numDependencies);
     }
 }
