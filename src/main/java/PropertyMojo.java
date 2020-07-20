@@ -6,6 +6,7 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
+import org.eclipse.sisu.Parameters;
 
 import java.util.List;
 
@@ -17,9 +18,14 @@ public class PropertyMojo extends AbstractMojo {
     @Parameter(property = "scope")
     String scope;
 
+    @Parameter(property = "additionalPath")
+    String additionalPath;
+
     public void execute() throws MojoExecutionException, MojoFailureException {
         List<Dependency> dependencies;
         dependencies = project.getDependencies();
+        String basedir = project.getBasedir().getAbsolutePath();
+        getLog().info("Path be like: " + basedir);
         long numDependencies = dependencies.stream()
                 .filter(d -> (scope == null || scope.isEmpty()) || scope.equals(d.getScope()))
                 .count();

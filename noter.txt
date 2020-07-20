@@ -1,0 +1,7 @@
+Skal itere over filer/mapper, skal ikke hardcodes at all fuck det
+Der er flere mapper med mapper i.
+
+Kan man lave det i main pommen som så gennemgår alle projekterne og replacer?
+Tage imod "origin" folder input, skal ignores
+
+Daddy properties build bliver kørt i children build, så man skal et step baglæns i stien for at finde trunk properties
