@@ -8,6 +8,7 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.eclipse.sisu.Parameters;
 
+import java.io.File;
 import java.util.List;
 
 @Mojo(name = "property", defaultPhase = LifecyclePhase.COMPILE)
@@ -23,12 +24,13 @@ public class PropertyMojo extends AbstractMojo {
 
     public void execute() throws MojoExecutionException, MojoFailureException {
         List<Dependency> dependencies;
-        dependencies = project.getDependencies();
+        String BasePropertyFolderName = "/core";
+
         String basedir = project.getBasedir().getAbsolutePath();
         getLog().info("Path be like: " + basedir);
-        long numDependencies = dependencies.stream()
-                .filter(d -> (scope == null || scope.isEmpty()) || scope.equals(d.getScope()))
-                .count();
-        getLog().info("Number of dependencies: " + numDependencies);
+        File coreDir = new File(basedir+BasePropertyFolderName);
+        File baseFolder = new File(basedir);
+        File[] propertyFolders = baseFolder.listFiles();
+
     }
 }
