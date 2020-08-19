@@ -23,7 +23,6 @@ public class PropertyMojo extends AbstractMojo {
     String additionalPath;
 
     public void execute() throws MojoExecutionException, MojoFailureException {
-        List<Dependency> dependencies;
         String BasePropertyFolderName = "/core";
 
         String basedir = project.getBasedir().getAbsolutePath();
